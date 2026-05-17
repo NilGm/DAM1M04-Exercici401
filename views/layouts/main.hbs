@@ -6,10 +6,21 @@
 </head>
 <body>
     {{> header}}
+    
+    <div class="container" style="display: flex; justify-content: flex-end; margin-top: 10px; gap: 10px; align-items: center;">
+        <label for="theme-selector">🎨 <b>Estil ERP:</b></label>
+        <select id="theme-selector" style="padding: 5px; border-radius: 4px;">
+            <option value="theme-light">Clar</option>
+            <option value="theme-dark">Nit Suau</option>
+            <option value="theme-contrast">Alt Contrast</option>
+        </select>
+    </div>
+
     {{> menu}}
     <main class="container"> {{{body}}} </main>
     {{> footer}}
-    <script src="/js/main.js"></script>
+    
     <script src="/js/validation.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,50 @@
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h2>{{title}}</h2>
+        <a href="/clients" class="btn" style="background-color: #95a5a6; text-decoration: none;">Tornar al llistat</a>
+    </div>
+
+    <div class="card" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div>
+            <h3 style="margin-top: 0; color: var(--btn);">Informació General</h3>
+            <p><b>Nom complet:</b> {{customer.name}}</p>
+            <p><b>Correu Electrònic:</b> {{customer.email}}</p>
+            <p><b>Telèfon de contacte:</b> {{customer.phone}}</p>
+            <p><b>Alta al sistema:</b> {{formatDate customer.created_at}}</p>
+        </div>
+        
+        <div style="border-left: 1px solid var(--btn); padding-left: 20px;">
+            <h3 style="margin-top: 0; color: var(--btn);">Resum Executiu</h3>
+            <p><b>Total Gastat:</b> <span style="font-size: 18px; color: #2ecc71; font-weight: bold;">{{stats.total_gastat}}€</span></p>
+            <p><b>Tíquet Mitjà:</b> {{stats.ticket_mig}}€</p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+        <h3>Historial de Compres (Últimes 10 vendes)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Venda</th>
+                    <th>Data Factura</th>
+                    <th>Mètode de Pagament</th>
+                    <th>Total Facturat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each sales}}
+                <tr>
+                    <td>#{{this.id}}</td>
+                    <td>{{formatDate this.sale_date}}</td>
+                    <td>{{this.payment_method}}</td>
+                    <td><b>{{this.total}}€</b></td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="4" style="text-align: center;">Aquest client encara no ha realitzat cap compra al sistema.</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

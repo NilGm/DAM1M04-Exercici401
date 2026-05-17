@@ -21,6 +21,7 @@ app.set('view engine', 'hbs');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // <-- Añadido para soportar el envío de datos complejos/JSON en las ventas
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutes

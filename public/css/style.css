@@ -72,3 +72,42 @@ input.error
     color: red;
     font-size: 12px;
 }
+
+/* ==========================================================================
+   AÑADIDO: Soporte para clases del Helper de Handlebars y Toggle de Colores
+   ========================================================================== */
+
+/* Colores base adaptativos para usar con las clases del helper */
+:root {
+    --stock-r-bg: #ffcccc; --stock-r-txt: #cc0000;
+    --stock-o-bg: #ffe5cc; --stock-o-txt: #cc7a00;
+    --stock-g-bg: #ccffcc; --stock-g-txt: #006600;
+}
+
+body.theme-dark {
+    --stock-r-bg: #5c1d1d; --stock-r-txt: #ff8888;
+    --stock-o-bg: #5c3a1d; --stock-o-txt: #ffb888;
+    --stock-g-bg: #1d5c2d; --stock-g-txt: #88ff88;
+}
+
+body.theme-contrast {
+    --stock-r-bg: #000000; --stock-r-txt: #ff0000;
+    --stock-o-bg: #000000; --stock-o-txt: #ffaa00;
+    --stock-g-bg: #000000; --stock-g-txt: #00ff00;
+}
+
+/* Vinculación con el botón .show-colors y las palabras que devuelve el app.js */
+.show-colors .red { 
+    background-color: var(--stock-r-bg) !important; 
+    color: var(--stock-r-txt) !important; 
+}
+
+.show-colors .orange { 
+    background-color: var(--stock-o-bg) !important; 
+    color: var(--stock-o-txt) !important; 
+}
+
+.show-colors .green { 
+    background-color: var(--stock-g-bg) !important; 
+    color: var(--stock-g-txt) !important; 
+}
