@@ -1,0 +1,25 @@
+<div class="card">
+    <h2>Llistat Històric de Vendes</h2>
+    <div style="margin: 15px 0;">
+        <form action="/vendes" method="GET">
+            <input type="text" name="cerca" value="{{cerca}}" placeholder="Cerca per nom de client...">
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr><th>Data</th><th>Client</th><th>Mètode de Pagament</th><th>Total</th><th>Accions</th></tr>
+        </thead>
+        <tbody>
+            {{#each sales}}
+            <tr>
+                <td>{{formatDate this.sale_date}}</td>
+                <td>{{this.customer_name}}</td>
+                <td>{{this.payment_method}}</td>
+                <td><b style="color: green;">{{this.total}}€</b></td>
+                <td><a href="/vendes/detall?id={{this.id}}" class="btn-action" style="background: var(--btn);">Veure ticket</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

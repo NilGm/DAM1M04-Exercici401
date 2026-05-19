@@ -1,0 +1,20 @@
+<div class="card" style="max-width: 700px; margin: 0 auto;">
+    <h2>Ticket de Venda #{{sale.id}}</h2>
+    <hr>
+    <p><b>Client:</b> {{sale.customer_name}} ({{sale.customer_email}})</p>
+    <p><b>Data:</b> {{formatDate sale.sale_date}} | <b>Mètode de Pagament:</b> {{sale.payment_method}}</p>
+    
+    <h3 style="margin-top: 20px;">Articles de la comanda</h3>
+    <table>
+        <thead>
+            <tr><th>Producte</th><th>Quantitat</th><th>Preu Unitari</th><th>Total Línia</th></tr>
+        </thead>
+        <tbody>
+            {{#each items}}
+            <tr><td>{{this.product_name}}</td><td>{{this.qty}}</td><td>{{this.unit_price}}€</td><td><b>{{this.line_total}}€</b></td></tr>
+            {{/each}}
+            <tr><td colspan="3" style="text-align: right;"><b>TOTAL FINAL:</b></td><td><b style="color: green; font-size: 18px;">{{sale.total}}€</b></td></tr>
+        </tbody>
+    </table>
+    <a href="/vendes" class="btn-action" style="background: #95a5a6; margin-top: 15px;">Tornar enrere</a>
+</div>

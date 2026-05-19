@@ -9,19 +9,21 @@ app.engine('hbs', hbs.engine({
     defaultLayout: 'main',
     helpers: {
         eq: (a, b) => a === b,
-        formatDate: (date) => new Date(date).toLocaleDateString(),
+        formatDate: (date) => date ? new Date(date).toLocaleDateString() : '',
         calculateStockClass: (stock) => {
             if (stock <= 5) return 'red';
             if (stock <= 15) return 'orange';
             return 'green';
-        }
+        },
+        numAdd: (val, step) => parseInt(val) + parseInt(step),
+        numSubtract: (val, step) => Math.max(0, parseInt(val) - parseInt(step))
     }
 }));
 app.set('view engine', 'hbs');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // <-- Añadido para soportar el envío de datos complejos/JSON en las ventas
+app.use(express.json()); 
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutes

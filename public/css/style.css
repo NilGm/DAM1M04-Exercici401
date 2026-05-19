@@ -1,113 +1,64 @@
-:root 
-{ 
-    --bg: #fff;
-    --txt: #000;
-    --card: #f9f9f9;
+:root { 
+    --bg: #ffffff;
+    --txt: #2c3e50;
+    --card: #f8f9fa;
     --btn: #3498db; 
-}
-
-body.theme-dark 
-{ 
-    --bg: #1a1a1a; 
-    --txt: #e0e0e0;
-    --card: #2d2d2d;
-    --btn: #1abc9c; 
-}
-
-body.theme-contrast 
-{
-    --bg: #000;
-    --txt: #fff000;
-    --card: #000;
-    --btn: #fff; 
-}
-
-body 
-{ 
-    background: var(--bg);
-    color: var(--txt);
-    font-family: 'Segoe UI', sans-serif;
-    transition: 0.3s; 
-}
-
-.card 
-{ 
-    background: var(--card);
-    padding: 20px;
-    border-radius: 8px;
-    margin: 10px 0;
-    border: 1px solid var(--btn);
-}
-
-.hidden 
-{ 
-    display: none; 
-}
-
-.stock-red 
-{ 
-    background-color: #ffcccc;
-    color: #cc0000; 
-}
-
-.stock-orange 
-{ 
-    background-color: #ffe5cc;
-    color: #cc7a00; 
-}
-
-.stock-green
-{ 
-    background-color: #ccffcc;
-    color: #006600; 
-}
-
-input.error 
-{ 
-    border: 2px solid red !important;
-}
-
-.error-msg 
-{ 
-    color: red;
-    font-size: 12px;
-}
-
-/* ==========================================================================
-   AÑADIDO: Soporte para clases del Helper de Handlebars y Toggle de Colores
-   ========================================================================== */
-
-/* Colores base adaptativos para usar con las clases del helper */
-:root {
+    --table-header: #f1f2f6;
     --stock-r-bg: #ffcccc; --stock-r-txt: #cc0000;
     --stock-o-bg: #ffe5cc; --stock-o-txt: #cc7a00;
     --stock-g-bg: #ccffcc; --stock-g-txt: #006600;
 }
 
-body.theme-dark {
+body.theme-dark { 
+    --bg: #1e272e; 
+    --txt: #dcdde1;
+    --card: #2f3640;
+    --btn: #1abc9c; 
+    --table-header: #2f3640;
     --stock-r-bg: #5c1d1d; --stock-r-txt: #ff8888;
     --stock-o-bg: #5c3a1d; --stock-o-txt: #ffb888;
     --stock-g-bg: #1d5c2d; --stock-g-txt: #88ff88;
 }
 
 body.theme-contrast {
+    --bg: #000000;
+    --txt: #ffffff;
+    --card: #000000;
+    --btn: #f1c40f; 
+    --table-header: #111111;
     --stock-r-bg: #000000; --stock-r-txt: #ff0000;
     --stock-o-bg: #000000; --stock-o-txt: #ffaa00;
     --stock-g-bg: #000000; --stock-g-txt: #00ff00;
 }
 
-/* Vinculación con el botón .show-colors y las palabras que devuelve el app.js */
-.show-colors .red { 
-    background-color: var(--stock-r-bg) !important; 
-    color: var(--stock-r-txt) !important; 
+body { 
+    background: var(--bg);
+    color: var(--txt);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    transition: background 0.3s, color 0.3s; 
+    margin: 0; padding: 20px;
 }
 
-.show-colors .orange { 
-    background-color: var(--stock-o-bg) !important; 
-    color: var(--stock-o-txt) !important; 
+.container { max-width: 1200px; margin: 0 auto; }
+.card { 
+    background: var(--card);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px solid var(--btn);
 }
 
-.show-colors .green { 
-    background-color: var(--stock-g-bg) !important; 
-    color: var(--stock-g-txt) !important; 
-}
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th { background-color: var(--table-header); padding: 12px; text-align: left; }
+td { padding: 12px; border-bottom: 1px solid #ddd; }
+
+.hidden { display: none !important; }
+input.error { border: 2px solid red !important; }
+.error-msg { color: red; font-size: 12px; display: block; margin-top: 4px; }
+
+/* Integración de los colores dinámicos con el toggle .show-colors */
+.show-colors .red { background-color: var(--stock-r-bg) !important; color: var(--stock-r-txt) !important; }
+.show-colors .orange { background-color: var(--stock-o-bg) !important; color: var(--stock-o-txt) !important; }
+.show-colors .green { background-color: var(--stock-g-bg) !important; color: var(--stock-g-txt) !important; }
+
+.btn-action { text-decoration: none; padding: 5px 10px; border-radius: 4px; color: #fff; font-size: 14px; display: inline-block; }

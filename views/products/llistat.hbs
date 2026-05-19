@@ -1,0 +1,43 @@
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Gestió de Productes</h2>
+        <a href="/productes/producteAfegir" class="btn-action" style="background-color: green;">+ Afegir Producte</a>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; margin: 15px 0;">
+        <form action="/productes" method="GET" style="display: flex; gap: 10px;">
+            <input type="text" name="cerca" value="{{cerca}}" placeholder="Cerca per nom o cat...">
+            <button type="submit">Buscar</button>
+            {{#if cerca}}<a href="/productes" style="padding: 5px; background: #ccc; color: black; text-decoration: none; border-radius: 4px;">Netejar</a>{{/if}}
+        </form>
+        <button id="toggle-colors">Toggle Colors Estoc</button>
+    </div>
+
+    <table class="taula-estoc">
+        <thead>
+            <tr><th>Nom</th><th>Categoria</th><th>Preu</th><th>Estoc</th><th>Actiu</th><th>Accions</th></tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.price}}€</td>
+                <td class="{{calculateStockClass this.stock}}"><b>{{this.stock}}</b></td>
+                <td>{{#if this.active}}<span style="color:green">Sí</span>{{else}}<span style="color:red">No</span>{{/if}}</td>
+                <td><a href="/productes/producteEditar?id={{this.id}}" class="btn-action" style="background: orange; color: black;">Editar</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+        {{#if (eq pagina 0)}}
+            <button disabled>Anterior</button>
+        {{else}}
+            <a href="/productes?pagina={{numSubtract pagina 1}}&cerca={{cerca}}" class="btn-action" style="background: var(--btn);">Anterior</a>
+        {{/if}}
+        <span>Pàgina: {{pagina}}</span>
+        <a href="/productes?pagina={{numAdd pagina 1}}&cerca={{cerca}}" class="btn-action" style="background: var(--btn);">Següent</a>
+    </div>
+</div>

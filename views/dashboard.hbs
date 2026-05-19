@@ -1,0 +1,58 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Panell de Control Executiu</h2>
+    <button id="toggle-dashboard" style="padding: 8px 12px; background: var(--btn); color: white; border: none; border-radius: 4px; cursor: pointer;">Veure Tauler Compacte</button>
+</div>
+
+<div id="dashboard-full">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+        <div class="card" style="text-align: center;">
+            <h3>Vendes d'Avui</h3>
+            <p style="font-size: 24px; font-weight: bold; color: green;">{{kpis.avui}}€</p>
+            <small>Comandes avui: {{kpis.c_avui}}</small>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h3>Vendes del Mes</h3>
+            <p style="font-size: 24px; font-weight: bold; color: blue;">{{kpis.mes}}€</p>
+            <small>Comandes mes: {{kpis.c_mes}}</small>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h3>Stock Baix</h3>
+            <p style="font-size: 24px; font-weight: bold; color: red;">{{kpis.stock}} Pr.</p>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+        <div class="card">
+            <h3>Últimes 5 Vendes</h3>
+            <table>
+                <thead>
+                    <tr><th>Data</th><th>Client</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    {{#each last5}}
+                    <tr><td>{{formatDate this.sale_date}}</td><td>{{this.name}}</td><td><b>{{this.total}}€</b></td></tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h3>Top 5 Més Venuts</h3>
+            <table>
+                <thead>
+                    <tr><th>Producte</th><th>Unitats</th></tr>
+                </thead>
+                <tbody>
+                    {{#each top5}}
+                    <tr><td>{{this.name}}</td><td><b>{{this.total}}</b></td></tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="dashboard-compact" class="hidden" style="margin-top: 15px;">
+    <div class="card" style="border-left: 5px solid var(--btn);">
+        <p><b>Resum ràpid:</b> Facturat Avui: {{kpis.avui}}€ | Facturat Mes: {{kpis.mes}}€ | Alerta d'estocs: {{kpis.stock}} items crítics.</p>
+    </div>
+</div>

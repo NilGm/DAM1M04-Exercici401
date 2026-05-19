@@ -1,64 +1,42 @@
 <div class="card">
-    <h2>Gestió de Productes</h2>
-    
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <form action="/productes" method="GET" style="display: flex; gap: 10px;">
-            <input type="text" name="cerca" value="{{cerca}}" placeholder="Cerca per nom o categoria...">
-            <button type="submit">Buscar</button>
-            {{#if cerca}}
-                <a href="/productes" class="btn" style="background-color: #95a5a6; text-decoration: none;">Netejar</a>
-            {{/if}}
-        </form>
-
-        <button id="toggle-colors" type="button">Activar/Desactivar Colors Estoc</button>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Gestió de Clients</h2>
+        <a href="/clients/clientAfegir" class="btn-action" style="background-color: green;">+ Afegir Client</a>
     </div>
 
-    <table class="taula-estoc">
+    <div style="margin: 15px 0;">
+        <form action="/clients" method="GET" style="display: flex; gap: 15px; align-items: center;">
+            <input type="text" name="cerca" value="{{cerca}}" placeholder="Cerca per nom o email...">
+            <label><input type="checkbox" name="vip" value="true" {{#if vip}}checked{{/if}} onchange="this.form.submit()"> ⭐ Clients VIP (+5 compres)</label>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <table>
         <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Categoria</th>
-                <th>Preu</th>
-                <th>Estoc</th>
-                <th>Actiu</th>
-                <th>Accions</th>
-            </tr>
+            <tr><th>Nom</th><th>Email</th><th>Telèfon</th><th>Compres</th><th>Total Gastat</th><th>Accions</th></tr>
         </thead>
         <tbody>
-            {{#each products}}
+            {{#each customers}}
             <tr>
                 <td>{{this.name}}</td>
-                <td>{{this.category}}</td>
-                <td>{{this.price}}€</td>
-                <td class="{{calculateStockClass this.stock}}"><b>{{this.stock}}</b></td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{this.compres}}</td>
+                <td><b>{{this.total_gastat}}€</b></td>
                 <td>
-                    {{#if this.active}}
-                        <span style="color: green;">Sí</span>
-                    {{else}}
-                        <span style="color: red;">No</span>
-                    {{/if}}
+                    <a href="/clients/clientFitxa?id={{this.id}}" class="btn-action" style="background: DodgerBlue;">Fitxa</a>
+                    <a href="/clients/clientEditar?id={{this.id}}" class="btn-action" style="background: Gold; color: black;">Editar</a>
                 </td>
-                <td>
-                    <a href="/productes/producteEditar?id={{this.id}}" class="btn" style="text-decoration: none; padding: 4px 8px;">Editar</a>
-                </td>
-            </tr>
-            {{else}}
-            <tr>
-                <td colspan="6" style="text-align: center;">No s'han trobat productes.</td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 
     <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-        {{#if (eq pagina 0)}}
-            <button disabled style="background-color: #ccc; cursor: not-allowed;">Anterior</button>
-        {{else}}
-            <a href="/productes?pagina=0&cerca={{cerca}}" class="btn" style="text-decoration: none;">Anterior</a>
-        {{/if}}
-        
-        <span>Pàgina actual: {{pagina}}</span>
-
-        <a href="/productes?pagina=1&cerca={{cerca}}" class="btn" style="text-decoration: none;">Següent</a>
+        {{#if (eq pagina 0)}}<button disabled>Anterior</button>
+        {{else}}<a href="/clients?pagina={{numSubtract pagina 1}}&cerca={{cerca}}&vip={{vip}}" class="btn-action" style="background: var(--btn);">Anterior</a>{{/if}}
+        <span>Pàgina: {{pagina}}</span>
+        <a href="/clients?pagina={{numAdd pagina 1}}&cerca={{cerca}}&vip={{vip}}" class="btn-action" style="background: var(--btn);">Següent</a>
     </div>
 </div>
